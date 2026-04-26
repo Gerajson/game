@@ -1,0 +1,20 @@
+{
+  "name": "menu",
+  "description": "Menu scene with age select, New Game, Continue, Parent Corner, Settings",
+  "nodes": [
+    "Canvas",
+    "GameManager",
+    "SaveManager",
+    "SpeechManager",
+    "AudioManager",
+    "MenuUI"
+  ],
+  "canvasScaler": {
+    "designResolution": {
+      "width": 1280,
+      "height": 720
+    },
+    "fitHeight": true,
+    "fitWidth": true
+  }
+}

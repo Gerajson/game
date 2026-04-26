@@ -1,0 +1,5 @@
+{
+  "name": "intro",
+  "description": "Intro animation scene with skip button",
+  "nodes": ["Canvas", "IntroTimeline", "SkipButton"]
+}

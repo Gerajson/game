@@ -1,0 +1,5 @@
+*.ts text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+*.scene text eol=lf
+*.anim text eol=lf

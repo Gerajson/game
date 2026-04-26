@@ -1,0 +1,14 @@
+{
+  "name": "chapter",
+  "description": "Universal chapter scene with ChapterUI + ReadingPanel + TaskPanel + RewardPanel",
+  "nodes": [
+    "Canvas",
+    "ChapterUI",
+    "ReadingPanel",
+    "TaskPanel",
+    "RewardPanel",
+    "TutorialHints",
+    "PauseOverlay",
+    "ErrorOverlay"
+  ]
+}
