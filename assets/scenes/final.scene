@@ -1,0 +1,5 @@
+{
+  "name": "final",
+  "description": "Final statistics, parent panel shortcut, secret Bukvoed video trigger",
+  "nodes": ["Canvas", "StatsPanel", "ParentButton", "SecretVideoButton"]
+}

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Родительский уголок — Заврик</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #fff6dd; color: #332416; }
+    .hidden { display: none; }
+    .card { background: #fff; border: 2px solid #795430; border-radius: 12px; padding: 12px; margin-bottom: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+    img { width: 100%; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Родительская панель</h1>
+  <div id="pinCard" class="card">
+    <p>Введите PIN:</p>
+    <input id="pinInput" type="password" maxlength="4" />
+    <button id="pinBtn">Открыть</button>
+    <p id="pinError" style="color:#ff6b6b"></p>
+  </div>
+
+  <div id="content" class="hidden">
+    <div class="card">
+      <h2>Статистика</h2>
+      <pre id="stats"></pre>
+      <button onclick="window.print()">Печать отчёта</button>
+    </div>
+
+    <div class="card">
+      <h2>Фотоохота</h2>
+      <div id="taskPhotos" class="grid"></div>
+    </div>
+
+    <div class="card">
+      <h2>Лепка</h2>
+      <div id="craftPhotos" class="grid"></div>
+    </div>
+  </div>
+
+  <script>
+    const SAVE_KEY = 'zavrik_gameProgress';
+    const PIN = '0000';
+
+    const pinBtn = document.getElementById('pinBtn');
+    const pinInput = document.getElementById('pinInput');
+    const pinError = document.getElementById('pinError');
+    const content = document.getElementById('content');
+    const pinCard = document.getElementById('pinCard');
+
+    function renderImages(containerId, images) {
+      const el = document.getElementById(containerId);
+      el.innerHTML = '';
+      images.forEach((base64) => {
+        const img = document.createElement('img');
+        img.src = base64;
+        img.loading = 'lazy';
+        el.appendChild(img);
+      });
+    }
+
+    function formatDuration(seconds) {
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = seconds % 60;
+      return `${h}ч ${m}м ${s}с`;
+    }
+
+    pinBtn.addEventListener('click', () => {
+      if (pinInput.value !== PIN) {
+        pinError.textContent = 'Неверный PIN';
+        return;
+      }
+
+      pinCard.classList.add('hidden');
+      content.classList.remove('hidden');
+
+      const raw = localStorage.getItem(SAVE_KEY);
+      const progress = raw ? JSON.parse(raw) : null;
+      const stats = document.getElementById('stats');
+
+      if (!progress) {
+        stats.textContent = 'Данные не найдены.';
+        return;
+      }
+
+      stats.textContent = JSON.stringify({
+        ageLevel: progress.ageLevel,
+        currentChapter: progress.currentChapter,
+        completedChapters: progress.completedChapters,
+        readingAttempts: progress.readingStats.length,
+        jumpCount: progress.jumpCount,
+        totalPlayTime: formatDuration(progress.totalPlayTime || 0),
+        updatedAt: new Date(progress.updatedAt).toLocaleString(),
+      }, null, 2);
+
+      renderImages('taskPhotos', progress.taskPhotos || []);
+      renderImages('craftPhotos', progress.craftPhotos || []);
+    });
+  </script>
+</body>
+</html>
