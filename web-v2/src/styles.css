@@ -1,0 +1,18 @@
+:root {
+  --bg: #fff6dd;
+  --card: #ffffff;
+  --text: #332416;
+  --accent: #66c4ff;
+  --accent-dark: #369bdd;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, Arial, sans-serif; color: var(--text); background: var(--bg); }
+.screen { max-width: 860px; margin: 20px auto; padding: 0 16px; }
+.card { border: 2px solid #795430; border-radius: 14px; padding: 16px; background: var(--card); margin-bottom: 12px; }
+.hud { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+button { border: none; border-radius: 10px; padding: 10px 14px; background: var(--accent); color: #03233d; font-weight: 600; cursor: pointer; }
+button:hover { background: var(--accent-dark); color: #fff; }
+.hidden { display: none; }
+select { margin-left: 8px; padding: 6px; }
